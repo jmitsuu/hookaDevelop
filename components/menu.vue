@@ -10,21 +10,21 @@ const store = useCartStore()
     <section class="flex relative">
 
         <div v-if="store.popUp"
-            class="fixed right-4 top-40 rounded-xl z-50 p-3 bg-amber-300 text-[1.1rem] items-center flex">
+            class="fixed right-4 top-40 rounded-xl z-50 p-3 bg-amber-300 text-[1.1rem] items-center flex ">
             Item Adicionado ao carrinho
             <Icon name="uiw:smile-o" class="h-6 ml-1 text-yellow-100" />
         </div>
 
 
-        <div class="w-full 0 relative bg-gradient-to-b via-90%">
+        <div class="w-full 0 relative bg-gradient-to-b via-90% ">
             <LazyCart/>
-            <header class="fixed w-full z-50 bg-black h-24 flex justify-center">
-                <nav class="flex items-center gap-11">
+            <header class="fixed min-w-full z-50  h-24 flex justify-center  bg-[url('@/assets/images/banner.png')] bg-center  ">
+                <nav class="flex items-center gap-11 ">
                     <NuxtLink to="/" class="absolute left-2">
                         <img src="../assets/logo.jpeg" class="h-20 w-20 cursor-pointer rounded-md" />
                     </NuxtLink>
 
-                    <div class="md:flex gap-11 hidden text-white">
+                    <div class="md:flex gap-11 hidden text-white xl:text-[1.4rem] font-semibold bg-black  rounded-md bg-opacity-20">
                         <NuxtLink to="/" class="link">Home</NuxtLink>
                         <NuxtLink to="/essencias" class="link">Essências</NuxtLink>
                         <NuxtLink to="/aluminios" class="link">Aluminio</NuxtLink>
@@ -37,11 +37,11 @@ const store = useCartStore()
                     <div class="p-3 absolute right-0 rounded-md flex justify-center items-center">
                         <div class="mr-4 flex">
                     
-                            <Icon name="eva:shopping-cart-fill" class=" text-4xl text-green-800 cursor-pointer " @click="store.cartLength >= 1? store.modalCart =true : store.modalCart = false" />
+                            <Icon name="eva:shopping-cart-fill" class=" text-6xl text-green-800 cursor-pointer " @click="store.cartLength >= 1? store.modalCart =true : store.modalCart = false" />
                             <span class="text-gray-200 text-xs">{{ store.cartLength }}</span>
                         </div>
 
-                        <h1 class="text-gray-200 font-bold text-[1.8rem] hidden md:block ">Hookah MK</h1>
+                        <!-- <h1 class="text-gray-200 font-bold text-[1.8rem] hidden md:block ">Hookah MK</h1> -->
             
             <span class="md:hidden">
                 <Icon name="fluent-mdl2:bulleted-list-2"     @click="modal = !modal" class="text-4xl  cursor-pointer text-white font-bold" />
@@ -52,7 +52,7 @@ const store = useCartStore()
 
                 <Transition>
                     <div v-if="modal"
-                        class="flex flex-col h-screen w-44 z-50 right-0 fixed bg-black opacity-80 top-0 gap-8 border-b-2 text-white text-[1.8rem] p-3">
+                        class="flex flex-col h-screen w-44 z-50 right-0 fixed bg-black opacity-80 top-0 gap-8 border-b-2   text-white text-[1.8rem] p-3">
                         
                         <Icon name="ci:close-md"     @click="modal = false" class="h-5 text-red-500 cursor-pointer" />
                         <NuxtLink @click="modal = false"  to="/">Home</NuxtLink>
