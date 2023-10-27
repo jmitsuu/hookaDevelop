@@ -20,13 +20,13 @@ const store = useCartStore()
             <LazyCart/>
             
             <header class="fixed min-w-full  z-50  h-24 flex justify-center   ">
-                <img src="@/assets/images/banner.png" class="xl:w-full xl:h-full h-full w-full  		object-cover absolute"/>
+                <img src="@/assets/images/banner.png" class="xl:w-full xl:h-full h-full w-full 	object-cover  absolute"/>
                 <nav class="flex items-center gap-11 z-50 ">
                     <NuxtLink to="/" class="absolute left-2">
                         <img src="../assets/logo.jpeg" class="h-20 w-20 cursor-pointer rounded-md" />
                     </NuxtLink>
 
-                    <div class="md:flex gap-11 hidden text-white xl:text-[1.4rem] font-semibold bg-black  rounded-md bg-opacity-20">
+                    <div class="md:flex xl:gap-11 md:gap-1 hidden text-yellow-500 xl:text-[1.4rem] md:text-[1.1rem] font-semibold   bg-black   rounded-md bg-opacity-50">
                         <NuxtLink to="/" class="link">Home</NuxtLink>
                         <NuxtLink to="/essencias" class="link">Essências</NuxtLink>
                         <NuxtLink to="/aluminios" class="link">Aluminio</NuxtLink>
@@ -35,12 +35,17 @@ const store = useCartStore()
                         <NuxtLink to="/rosh" class="link">Rosh</NuxtLink>
                         <NuxtLink to="/pegador" class="link">Pegador</NuxtLink>
                     </div>
+                    <div class="p-2 relative">
+                        <Icon name="eva:shopping-cart-fill" class=" text-5xl  text-yellow-600 ml-48 md:ml-0 cursor-pointer " @click="store.cartLength >= 1? store.modalCart =true : store.modalCart = false" />
+                        <span class="text-gray-200 text-xs font-bold absolute">{{ store.cartLength }}</span>
 
+                    </div>
+               
                     <div class="p-3 absolute right-0 rounded-md flex justify-center items-center">
                         <div class="mr-4 flex">
                     
-                            <Icon name="eva:shopping-cart-fill" class=" text-5xl text-green-800 cursor-pointer " @click="store.cartLength >= 1? store.modalCart =true : store.modalCart = false" />
-                            <span class="text-gray-200 text-xs">{{ store.cartLength }}</span>
+                           
+                           
                         </div>
 
                         <!-- <h1 class="text-gray-200 font-bold text-[1.8rem] hidden md:block ">Hookah MK</h1> -->
@@ -54,16 +59,16 @@ const store = useCartStore()
 
                 <Transition>
                     <div v-if="modal"
-                        class="flex flex-col h-screen w-44 z-50 right-0 fixed bg-black opacity-80 top-0 gap-8 border-b-2   text-white text-[1.8rem] p-3">
+                        class="flex flex-col h-screen w-44 z-50 right-0 fixed bg-black opacity-80 top-0 gap-8 border-b-2   text-yellow-500 text-[1.8rem] p-3">
                         
                         <Icon name="ci:close-md"     @click="modal = false" class="h-5 text-red-500 cursor-pointer" />
                         <NuxtLink @click="modal = false"  to="/">Home</NuxtLink>
                         <NuxtLink @click="modal = false" to="/essencias">Essências</NuxtLink>
                         <NuxtLink @click="modal = false" to="/aluminios">Aluminio</NuxtLink>
                         <NuxtLink @click="modal = false" to="/carvoes">Carvão</NuxtLink>
-                        <NuxtLink to="/acendedor" class="link">Acendedor</NuxtLink>
-                        <NuxtLink to="/rosh" class="link">Rosh</NuxtLink>
-                        <NuxtLink to="/pegador" class="link">Pegador</NuxtLink>
+                        <NuxtLink @click="modal = false" to="/acendedor" class="link">Acendedor</NuxtLink>
+                        <NuxtLink @click="modal = false" to="/rosh" class="link">Rosh</NuxtLink>
+                        <NuxtLink @click="modal = false" to="/pegador" class="link">Pegador</NuxtLink>
                     </div>
                 </Transition>
                 <div class="absolute top-28">
