@@ -20,8 +20,9 @@ const idItem = ref();
 const totalId = ref([]);
 const inputNewCategoryTitle = ref();
 const inputNewCategoryPrice = ref();
-const openEdit =ref(false)
-const wait = ref(false)
+const openEdit = ref(false)
+const wait = ref(false);
+const alert = ref(false)
 function getCategories(e) {
   if (e) {
     categories.value = e;
@@ -30,67 +31,57 @@ function getCategories(e) {
   }
 }
 async function getCatalago() {
-    wait.value = true
+  wait.value = true
   if (categories.value == "essencias") {
     const { data } = await useFetch(`/api/dbListItems/`);
     const { data1 } = data.value;
     dataItems.value = data1.data;
-    wait.value= false
+    wait.value = false
   }
   if (categories.value == "aluminios") {
     dataItems.value = ''
     const { data } = await useFetch(`/api/dbListItems/`);
     const { data2 } = data.value;
     dataItems.value = data2.data;
-    wait.value= false
+    wait.value = false
   }
   if (categories.value == "carvoes") {
     dataItems.value = ''
     const { data } = await useFetch(`/api/dbListItems/`);
     const { data3 } = data.value;
     dataItems.value = data3.data;
-      wait.value= false
+    wait.value = false
   }
   if (categories.value == "acendedor") {
-      dataItems.value = ''
+    dataItems.value = ''
     const { data } = await useFetch(`/api/dbListItems/`);
     const { data4 } = data.value;
     dataItems.value = data4.data;
-      wait.value= false
+    wait.value = false
   }
   if (categories.value == "rosh") {
     dataItems.value = ''
     const { data } = await useFetch(`/api/dbListItems/`);
     const { data5 } = data.value;
     dataItems.value = data5.data;
-      wait.value= false
+    wait.value = false
   }
   if (categories.value == "pegador") {
     dataItems.value = ''
     const { data } = await useFetch(`/api/dbListItems/`);
     const { data6 } = data.value;
     dataItems.value = data6.data;
-    wait.value= false
+    wait.value = false
   }
   title.value = "";
   price.value = "";
 
 }
 
-// async function getAll() {
-//   const { data } = await useFetch(`/api/dbListItems/`);
-//   console.log(data);
-//   if (!controlCategories.value) {
-//     dataItems.value = data.value.response;
-//     data.value.response.filter((item) => {
-//       totalId.value = item.id;
-//     });
-//   }
-// }
-// getAll();
 async function createItem(e) {
+  if (!e) return;
+  if (!price.value || !title.value) return;
   const files = e.target.files[0];
-
   console.log(files);
   const { data, error } = await supabase.storage
     .from("uploads")
@@ -103,7 +94,11 @@ async function createItem(e) {
   }
 }
 async function insertItems() {
-  getCatalago();
+  alert.value = true
+  setTimeout(() => {
+    alert.value = false
+  }, 4000);
+  if (!Urlimg.value) return;
   const { data, error } = await supabase.from(categories.value).insert({
     id: rId.toFixed(0),
     title: title.value,
@@ -112,10 +107,12 @@ async function insertItems() {
   });
   modal.value = false;
   console.log(data);
+  getCatalago();
   setTimeout(() => {
     controlInputs.value = false;
-    location.reload();
-  }, 2000);
+    Urlimg.value = ''
+    // location.reload();
+  }, 600);
 }
 function selectItem(id, imgName) {
   inputControl.value = true;
@@ -123,7 +120,7 @@ function selectItem(id, imgName) {
   openEdit.value = true;
 
 
-  
+
 }
 function closeSelect(id) {
   inputControl.value = false;
@@ -133,31 +130,31 @@ function closeSelect(id) {
 async function updateItems() {
   const { data, error } = await supabase
     .from(categories.value)
-    .update({  title: inputNewCategoryTitle.value, price: inputNewCategoryPrice.value })
+    .update({ title: inputNewCategoryTitle.value, price: inputNewCategoryPrice.value })
     .eq('id', idItem.value)
     .select();
-    openEdit.value = false
-    getCatalago()
-    console.log(data)
+  openEdit.value = false
+  getCatalago()
+  console.log(data)
 }
-async function deleteItems(id, imgPath){
-    const { data, error } = await supabase
-  .storage
-  .from('uploads')
-  .remove([imgPath])
+async function deleteItems(id, imgPath) {
+  const { data, error } = await supabase
+    .storage
+    .from('uploads')
+    .remove([imgPath])
   console.log(imgPath, data, error)
 
-setTimeout(async () => {
+  setTimeout(async () => {
     const { error } = await supabase
-  .from(categories.value)
-  .delete()
-  .eq('id', id)
-  console.log(error)
-  getCatalago() 
-}, 400);
+      .from(categories.value)
+      .delete()
+      .eq('id', id)
+    console.log(error)
+    getCatalago()
+  }, 400);
 
 }
-async function Out(){
+async function Out() {
   const { error } = await supabase.auth.signOut();
   location.href = '/'
 
@@ -165,61 +162,40 @@ async function Out(){
 // definePageMeta({
 //   middleware: 'auth'
 // })
-onMounted(() => {});
+onMounted(() => { });
 </script>
 
 <template>
   <main class="p-6 min-h-screen">
     <h1 class="text-[2.5rem] font-bold text-center">Painel Administrativo</h1>
     <div class="mt-20">
-      <button
-        class="px-4 py-3 bg-green-300 shadow mb-3 hover:bg-green-700 transition-all rounded-md font-semibold"
-        @click="modal = !modal"
-      >
+      <button class="px-4 py-3 bg-green-300 shadow mb-3 hover:bg-green-700 transition-all rounded-md font-semibold"
+        @click="modal = !modal" >
         Novo
       </button>
       <button class="float-right p-2 rounded-md bg-red-300" @click="Out">
         Sair do painel
       </button>
       <Transition>
-        <div
-          class="w-96 flex flex-col border-2 m-2 bg-slate-50 p-2 rounded-sm relative justify-center items-center"
-          v-if="modal"
-          @submit.prevent="createItem"
-        >
+        <div class="w-96 flex flex-col border-2 m-2 bg-slate-50 p-2 rounded-sm relative justify-center items-center"
+          v-if="modal" @submit.prevent="createItem">
           <div
             class="py-2 mb-5 bg-gray-300 relative w-32 text-center text-[1.1rem] hover:bg-gray-500 cursor-pointer transition-all rounded-md"
-            @click="modalCreate = !modalCreate"
-          >
-            <h1
-              class="uppercase"
-              v-if="!categories ? (categories = 'Selecione') : categories"
-            >
+            @click="modalCreate = !modalCreate">
+            <h1 class="uppercase" v-if="!categories ? (categories = 'Selecione') : categories">
               {{ categories }}
             </h1>
-            <ul
-              class="absolute bg-gray-500 w-full rounded-sm z-50"
-              v-if="modalCreate"
-            >
-              <li
-                class="hover:text-gray-100"
-                @click="getCategories('essencias')"
-              >
+            <ul class="absolute bg-gray-500 w-full rounded-sm z-50" v-if="modalCreate">
+              <li class="hover:text-gray-100" @click="getCategories('essencias')">
                 Essencia
               </li>
               <li class="hover:text-gray-100" @click="getCategories('carvoes')">
                 carvoes
               </li>
-              <li
-                class="hover:text-gray-100"
-                @click="getCategories('aluminios')"
-              >
+              <li class="hover:text-gray-100" @click="getCategories('aluminios')">
                 aluminios
               </li>
-              <li
-                class="hover:text-gray-100"
-                @click="getCategories('acendedor')"
-              >
+              <li class="hover:text-gray-100" @click="getCategories('acendedor')">
                 Acendedor
               </li>
               <li class="hover:text-gray-100" @click="getCategories('rosh')">
@@ -231,39 +207,18 @@ onMounted(() => {});
             </ul>
           </div>
 
-          <label
-            class="text-[1.5rem] text-gray-700 uppercase"
-            v-if="controlCategories"
-            >Titulo</label
-          >
-          <input
-            type="text"
-            v-model="title"
-            v-if="controlCategories"
-            required
-            class="border-2 rounded-sm bg-slate-100 outline-none"
-          />
-          <label
-            class="text-[1.5rem] text-gray-700 uppercase"
-            v-if="controlCategories"
-            >Preço</label
-          >
-          <input
-            type="text"
-            v-model="price"
-            v-if="controlCategories"
-            class="border-2 w-20 rounded-md bg-slate-100 outline-none"
-          />
-          <label class="text-[1.5rem] text-gray-700 uppercase" v-if="title"
-            >Imagem</label
-          >
-          <input type="file" @change="createItem" v-if="title" />
+          <label class="text-[1.5rem] text-gray-700 uppercase" v-if="controlCategories">Titulo</label>
+          <input type="text" v-model="title" v-if="controlCategories" required
+            class="border-2 rounded-sm bg-slate-100 outline-none " />
+
+          <label class="text-[1.5rem] text-gray-700 uppercase" v-if="controlCategories" required>Preço</label>
+          <input type="text" v-model="price" v-if="controlCategories" required
+            class="border-2 w-20 rounded-md bg-slate-100 outline-none " />
+          <label class="text-[1.5rem] text-gray-700 uppercase" v-if="title">Imagem</label>
+          <input type="file" @change="createItem" v-if="title" required />
 
           <div class="flex gap-2 justify-center">
-            <button
-              class="bg-green-900 text-white p-2 rounded-md w-24 mt-4"
-              @click="insertItems"
-            >
+            <button class="bg-green-900 text-white p-2 rounded-md w-24 mt-4" @click="insertItems">
               Cadastrar
             </button>
           </div>
@@ -271,12 +226,8 @@ onMounted(() => {});
       </Transition>
 
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table
-          class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
-        >
-          <thead
-            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-          >
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" class="px-6 py-3">Imagem</th>
               <th scope="col" class="px-6 py-3">Titulo</th>
@@ -286,107 +237,69 @@ onMounted(() => {});
             </tr>
           </thead>
           <tbody>
-            <tr
-              class="bg-white border-b dark:border-gray-700 relative"
-              v-for="items in dataItems"
-              :key="items.id"
-            >
-              <th
-                scope="row"
-                class="px-2 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-white"
-              >
-                <img
-                  class="h-10"
-                  :src="
-                    `https://kolhpoypmdfbtfpgwuwt.supabase.co/storage/v1/object/public/uploads/` +
-                    items.img
-                  "
-                />
+            <tr class="bg-white border-b dark:border-gray-700 relative" v-for="items in dataItems" :key="items.id">
+              <th scope="row" class="px-2 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-white">
+                <img class="h-10" :src="`https://kolhpoypmdfbtfpgwuwt.supabase.co/storage/v1/object/public/uploads/` +
+                  items.img
+                  " />
               </th>
               <td class="px-6 py-4 relative">
-                <input
-                  type="text"
-                  v-if="items.id == idItem"
-                  v-model="inputNewCategoryTitle"
-                  :placeholder="items.title"
-                  class=" p-2 border-2 border-blue-500 rounded-sm bg-white text-slate-900"
-                  :disabled="!inputControl"
-                  required
-                />
-                <input
-                  v-else
-                  type="text"
-                  :placeholder="items.title"
-                  :disabled="!inputControl"
-                  class="font-bold  bg-white"
-                />
-               
+                <input type="text" v-if="items.id == idItem" v-model="inputNewCategoryTitle" :placeholder="items.title"
+                  class=" p-2 border-2 border-blue-500 rounded-sm bg-white text-slate-900 " :disabled="!inputControl"
+                  required />
+                <input v-else type="text" :placeholder="items.title" :disabled="!inputControl"
+                  class="font-bold  bg-white  w-full" />
+
               </td>
               <td class="px-6 py-4 relative">
-                <input
-                  type="text"
-                  v-if="items.id == idItem"
-                  v-model="inputNewCategoryPrice"
-                  :placeholder="items.price"
-                  class=" p-2 border-2 border-blue-500 rounded-sm bg-white text-slate-900"
-                    :disabled="!inputControl"
-                  required
-                />
-                
-                <input
-                v-else
-                  type="text"
-                  v-model="items.price"
-                  :placeholder="items.price"
-                  :disabled="!inputControl"
-                  class="font-bold bg-white"
-                />
-               <span v-if="items.id == idItem" class="absolute right-0">
-                <Icon v-if="openEdit" name="flat-color-icons:checkmark" color="green" class="text-3xl cursor-pointer" @click="updateItems"/>
-                <Icon v-if="openEdit" name="ci:close-md"  class="text-3xl text-red-500 cursor-pointer"  @click="closeSelect(items.id)" />
-               </span>
-              
+                <input type="text" v-if="items.id == idItem" v-model="inputNewCategoryPrice" :placeholder="items.price"
+                  class=" p-2 border-2 border-blue-500 rounded-sm bg-white text-slate-900" :disabled="!inputControl"
+                  required />
+
+                <input v-else type="text" v-model="items.price" :placeholder="items.price" :disabled="!inputControl"
+                  class="font-bold bg-white" />
+                <span v-if="items.id == idItem" class="absolute right-0">
+                  <Icon v-if="openEdit" name="flat-color-icons:checkmark" color="green" class="text-3xl cursor-pointer"
+                    @click="updateItems" />
+                  <Icon v-if="openEdit" name="ci:close-md" class="text-3xl text-red-500 cursor-pointer"
+                    @click="closeSelect(items.id)" />
+                </span>
+
               </td>
 
               <td class="px-6 py-4">
-                
-                <button
-                v-if="!openEdit"
-                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-3"
-                  @click="selectItem(items.id, items.img)"
-                >
+
+                <button v-if="!openEdit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-3"
+                  @click="selectItem(items.id, items.img)">
                   Editar
                 </button>
-                <button
-                v-if="!openEdit"
-                  class="font-medium text-red-600 dark:text-red-500 hover:underline"
-                @click="deleteItems(items.id, items.img)"
-                >
+                <button v-if="!openEdit" class="font-medium text-red-600 dark:text-red-500 hover:underline"
+                  @click="deleteItems(items.id, items.img)">
                   Deletar
                 </button>
               </td>
             </tr>
           </tbody>
         </table>
-       
+
       </div>
       <div class="border  shadow rounded-md p-4 " v-if="wait">
-  <div class="animate-pulse flex space-x-4 justify-between">
-      <div class="h-5 w-10  rounded">
-     carregando...
+        <div class="animate-pulse flex space-x-4 justify-between">
+          <div class="h-5 w-10  rounded">
+            carregando...
+          </div>
+          <div class="h-5 w-10 rounded">
+            carregando...
+          </div>
+          <div class="h-5 w-10 bg-slate-200 rounded">
+
+          </div>
+
+
+
+
+        </div>
       </div>
-      <div class="h-5 w-10 rounded">
-        carregando...
-      </div>
-      <div class="h-5 w-10 bg-slate-200 rounded">
-     
-      </div>
-   
-     
-  
- 
-    </div>
-  </div>
 
     </div>
   </main>

@@ -26,7 +26,7 @@ location.href = '/painel'
 </script>
 <template>
   <div class="min-h-screen w-full flex justify-center items-center">
-    <div class="border-2 p-8 flex flex-col">signInWithPassword
+    <div class="border-2 p-8 flex flex-col">
     <h1 class="text-[2rem] font-semibold">   Acesso Restrito</h1>
     <label>E-mail</label>
     <input

@@ -18,7 +18,7 @@ const store = useCartStore()
 
         <div class="w-full 0 relative bg-gradient-to-b via-90% ">
             <LazyCart/>
-            <header class="fixed min-w-full z-50  h-24 flex justify-center  bg-[url('@/assets/images/banner.png')] bg-center  ">
+            <header class="fixed min-w-full  z-50  h-24 flex justify-center  bg-[url('@/assets/images/banner.png')] bg-center  ">
                 <nav class="flex items-center gap-11 ">
                     <NuxtLink to="/" class="absolute left-2">
                         <img src="../assets/logo.jpeg" class="h-20 w-20 cursor-pointer rounded-md" />
