@@ -18,8 +18,10 @@ const store = useCartStore()
 
         <div class="w-full 0 relative bg-gradient-to-b via-90% ">
             <LazyCart/>
-            <header class="fixed min-w-full  z-50  h-24 flex justify-center  bg-[url('@/assets/images/banner.png')] bg-center  ">
-                <nav class="flex items-center gap-11 ">
+            
+            <header class="fixed min-w-full  z-50  h-24 flex justify-center   ">
+                <img src="@/assets/images/banner.png" class="xl:w-full xl:h-full h-full w-full  		object-cover absolute"/>
+                <nav class="flex items-center gap-11 z-50 ">
                     <NuxtLink to="/" class="absolute left-2">
                         <img src="../assets/logo.jpeg" class="h-20 w-20 cursor-pointer rounded-md" />
                     </NuxtLink>
@@ -37,7 +39,7 @@ const store = useCartStore()
                     <div class="p-3 absolute right-0 rounded-md flex justify-center items-center">
                         <div class="mr-4 flex">
                     
-                            <Icon name="eva:shopping-cart-fill" class=" text-6xl text-green-800 cursor-pointer " @click="store.cartLength >= 1? store.modalCart =true : store.modalCart = false" />
+                            <Icon name="eva:shopping-cart-fill" class=" text-5xl text-green-800 cursor-pointer " @click="store.cartLength >= 1? store.modalCart =true : store.modalCart = false" />
                             <span class="text-gray-200 text-xs">{{ store.cartLength }}</span>
                         </div>
 
