@@ -6,8 +6,8 @@ export default defineEventHandler(async (event)=>{
   
   const supabase = createClient(config.supabaseUrl, config.supabaseKey)
   const data1 = await supabase.from('essencias').select()
-  const data2 = await supabase.from('aluminios').select()
-  const data3 = await supabase.from('carvoes').select()
+  const data2 = await supabase.from('carvoes').select()
+  const data3 = await supabase.from('aluminios').select()
   const data4 = await supabase.from('acendedor').select()
   const data5 = await supabase.from('rosh').select()
   const data6 = await supabase.from('pegador').select()
