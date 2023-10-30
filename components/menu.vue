@@ -1,5 +1,7 @@
 <script setup>
 const modal = ref(false)
+const modalName = ref(false)
+const inputName =ref('')
 import { useCartStore } from '@/stores/storeCart';
 
 const store = useCartStore()
@@ -17,16 +19,17 @@ const store = useCartStore()
 
 
         <div class="w-full 0 relative bg-gradient-to-b via-90% ">
-            <LazyCart/>
-            
+            <LazyCart />
+
             <header class="fixed min-w-full  z-50  h-24 flex justify-center   ">
-                <img src="@/assets/images/banner.png" class="xl:w-full xl:h-full h-full w-full 	object-cover  absolute"/>
+                <img src="@/assets/images/banner.png" class="xl:w-full xl:h-full h-full w-full 	object-cover  absolute" />
                 <nav class="flex items-center gap-11 z-50 ">
                     <NuxtLink to="/" class="absolute left-2">
                         <img src="../assets/logo.jpeg" class="h-20 w-20 cursor-pointer rounded-md" />
                     </NuxtLink>
 
-                    <div class="md:flex xl:gap-11 md:gap-1 hidden text-yellow-500 xl:text-[1.4rem] md:text-[1.1rem] font-semibold   bg-black   rounded-md bg-opacity-50">
+                    <div
+                        class="md:flex xl:gap-11 md:gap-1 hidden text-yellow-500 xl:text-[1.4rem] md:text-[1.1rem] font-semibold   bg-black   rounded-md bg-opacity-50">
                         <NuxtLink to="/" class="link">Home</NuxtLink>
                         <NuxtLink to="/essencias" class="link">Essências</NuxtLink>
                         <NuxtLink to="/aluminios" class="link">Aluminio</NuxtLink>
@@ -36,33 +39,35 @@ const store = useCartStore()
                         <NuxtLink to="/pegador" class="link">Pegador</NuxtLink>
                     </div>
                     <div class="p-2 relative">
-                        <Icon name="eva:shopping-cart-fill" class=" text-5xl  text-yellow-600 ml-48 md:ml-0 cursor-pointer " @click="store.cartLength >= 1? store.modalCart =true : store.modalCart = false" />
+                        <Icon name="eva:shopping-cart-fill" class=" text-5xl  text-yellow-600 ml-48 md:ml-0 cursor-pointer "
+                            @click="store.cartLength >= 1 ? store.modalCart = true : store.modalCart = false" />
                         <span class="text-gray-200 text-xs font-bold absolute">{{ store.cartLength }}</span>
 
                     </div>
-               
+
                     <div class="p-3 absolute right-0 rounded-md flex justify-center items-center">
                         <div class="mr-4 flex">
-                    
-                           
-                           
+
+
+
                         </div>
 
                         <!-- <h1 class="text-gray-200 font-bold text-[1.8rem] hidden md:block ">Hookah MK</h1> -->
-            
-            <span class="md:hidden">
-                <Icon name="fluent-mdl2:bulleted-list-2"     @click="modal = !modal" class="text-4xl  cursor-pointer text-white font-bold" />
-            </span>
-            
+
+                        <span class="md:hidden">
+                            <Icon name="fluent-mdl2:bulleted-list-2" @click="modal = !modal"
+                                class="text-4xl  cursor-pointer text-white font-bold" />
+                        </span>
+
                     </div>
                 </nav>
 
                 <Transition>
                     <div v-if="modal"
                         class="flex flex-col h-screen w-44 z-50 right-0 fixed bg-black opacity-80 top-0 gap-8 border-b-2   text-yellow-500 text-[1.8rem] p-3">
-                        
-                        <Icon name="ci:close-md"     @click="modal = false" class="h-5 text-red-500 cursor-pointer" />
-                        <NuxtLink @click="modal = false"  to="/">Home</NuxtLink>
+
+                        <Icon name="ci:close-md" @click="modal = false" class="h-5 text-red-500 cursor-pointer" />
+                        <NuxtLink @click="modal = false" to="/">Home</NuxtLink>
                         <NuxtLink @click="modal = false" to="/essencias">Essências</NuxtLink>
                         <NuxtLink @click="modal = false" to="/aluminios">Aluminio</NuxtLink>
                         <NuxtLink @click="modal = false" to="/carvoes">Carvão</NuxtLink>
@@ -77,7 +82,19 @@ const store = useCartStore()
             </header>
 
             <div class="mt-44 border-2">
+                <!-- <div 
+                    class="w-48  bg-black right-4  bg-opacity-80  items-center rounded-md border-2  p-4 fixed z-50 bottom-28 flex flex-col">
+                    <Icon name="ci:close-md" @click="modalName = !modalName" class="h-5 text-red-500  cursor-pointer float-right" />
+                    <label class="text-white text-[1.2rem] mb-1">Insira seu nome</label>
+                    <input type="text" class="w-24 bg-gray-200 rounded-sm px-2" placeholder="Nome" v-model="inputName"
+                        required />
 
+                    <a v-if="inputName" class="bg-green-500 m-2 p-1 rounded-md text-white font-bold"
+                        :href="`https://api.whatsapp.com/send?phone=554891699518&text=Ol%C3%A1%20meu%20nome%20%C3%A9%20${inputName},%20tenho%20interesse%20em%20comprar%20os%20produto(s)%20abaixo:%0A%0A%20*${store.sendToWhats}*%20%0A%0ATotal:${store.allPrices}%20`">
+                        Chamar
+                    </a>
+
+                </div> -->
                 <a class="fixed bottom-3 right-5 z-50"
                     href="https://api.whatsapp.com/send?phone=554891699518&text=Ola!%20%0AVim%20pelo%20Site%20Hookah_MK."
                     target="_blank">
@@ -125,5 +142,4 @@ const store = useCartStore()
     opacity: 50%;
     transition-duration: 0.8s;
     color: white;
-}
-</style>
+}</style>
