@@ -43,7 +43,7 @@ onMounted(() => {
         <input type="text" class="w-24 bg-gray-200 rounded-sm px-2" placeholder="Nome" v-model="inputName" required/>
        
         <a v-if="inputName" class="bg-green-500 m-2 p-1 rounded-md text-white font-bold"
-        :href="`https://api.whatsapp.com/send?phone=554891699518&text=Ol%C3%A1%20meu%20nome%20%C3%A9%20${inputName},%20tenho%20interesse%20em%20comprar%20os%20produto(s)%20abaixo:%0A%0A%20*${store.sendToWhats}*%20%0A%0ATotal:${store.allPrices}%20`">
+        :href="`https://api.whatsapp.com/send?phone=554891752847&text=Ol%C3%A1%20meu%20nome%20%C3%A9%20${inputName},%20tenho%20interesse%20em%20comprar%20os%20produto(s)%20abaixo:%0A%0A%20*${store.sendToWhats}*%20%0A%0ATotal:${store.allPrices}%20`">
         Solicitar
       </a>
 
