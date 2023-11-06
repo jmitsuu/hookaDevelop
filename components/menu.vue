@@ -96,7 +96,7 @@ const store = useCartStore()
 
                 </div> -->
                 <a class="fixed bottom-3 right-5 z-50"
-                    href="https://api.whatsapp.com/send?phone=554891699518&text=Ola!%20%0AVim%20pelo%20Site%20Hookah_MK."
+                    href="https://api.whatsapp.com/send?phone=554891752847&text=Ola!%20%0AVim%20pelo%20Site%20Hookah_MK."
                     target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" x="10px" y="10px" width="80" height="100" viewBox="0 0 48 48">
                         <path fill="#fff"
