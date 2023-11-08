@@ -23,7 +23,7 @@ onMounted(() => {
         <img :src="img" :alt="title" class="h-64" />
 
         <p class="font-semibold text-blue-950 mt-3">{{ title }}</p>
-        <p class="text-[1.8rem] text-blue-800 font-bold">R$ {{ price }}</p>
+        <p class="text-[1.8rem] text-yellow-800 font-bold">R$ {{ price }}</p>
         <div class="flex gap-4  items-center mt-3 border-t-2">
 
             <a @click="store.incrementCart(items, qtd)"
