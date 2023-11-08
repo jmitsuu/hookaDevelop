@@ -19,7 +19,7 @@ onMounted(() => {
 
 <template>
     <li
-        class="justify-center items-center flex flex-col py-2  rounded-md  shadow-md bg-white m-2 scale-95 hover:scale-100 transition duration-300 ">
+        class="justify-center items-center flex flex-col py-2  rounded-md mt-10  shadow-md bg-white m-2 scale-95 hover:scale-100 transition duration-300 ">
         <img :src="img" :alt="title" class="h-64" />
 
         <p class="font-semibold text-blue-950 mt-3">{{ title }}</p>
