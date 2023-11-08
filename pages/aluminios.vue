@@ -1,24 +1,25 @@
 <script setup>
-// import { dataEssencia } from '../composables'
+import { useSearchStore } from '@/stores/search';
+const store = useSearchStore()
+const reloadData = ref([])
 const wait = ref()
 const dataAluminios = ref([])
 async function getApi(){
   wait.value = true
-const {data} = await useFetch('/api/dbListItems/')
+  const {data:aluminios} = await useFetch(`/api/routes/aluminios`)
 wait.value = false
-const {data3} = data.value
-
-dataAluminios.value = data3.data
-
+dataAluminios.value = aluminios.value.data
+store.queryItems = dataAluminios.value
+store.reloadData = dataAluminios.value;
 }
+
 getApi()
 onMounted(()=>{
- 
+
 })
 </script>
 
 <template>
-    <LazyMenu/>
   <main class="p-6 min-h-screen">
     <h1 class="text-[2.5rem] font-bold">Aluminios</h1>
     <div class="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-3">
@@ -36,7 +37,7 @@ onMounted(()=>{
             </div>
       <ul class=""
       v-else
-      v-for="item of dataAluminios"
+      v-for="item of store.searchItems"
           :key="item.title"
       >
       <LazyProdutos 

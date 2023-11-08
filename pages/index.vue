@@ -28,27 +28,18 @@ const searchCatalag = computed(() => {
     }
     return dataItems.value
 })
-getAll()
-onMounted(() => {
 
+onMounted(() => {
+    getAll()
     reloadData.value = dataItems.value
 
 })
 </script>
 
 <template>
-    <LazyMenu />
+ 
     <main class="p-6 min-h-screen">
-        <div class="absolute top-28">
-            <div class="relative mx-auto">
-                <input type="search" v-model="store.search" placeholder="Procurar..."
-                    class="p-2 bg-slate-100 md:w-full rounded-md" />
-                <MagnifyingGlassIcon class="text-black h-8 absolute top-1 right-2" />
-                <Icon name="pajamas:search" @click="modal = !modal"
-                    class="text-2xl  text-black  absolute top-2 right-2 cursor-pointer font-bold" />
-
-            </div>
-        </div>
+    
         <h1 class="text-[2.5rem] font-bold">Catálogo</h1>
 
         <div class="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-3">

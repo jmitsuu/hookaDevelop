@@ -1,9 +1,10 @@
 <script setup>
 const modal = ref(false)
 const modalName = ref(false)
-const inputName =ref('')
+const inputName = ref('')
 import { useCartStore } from '@/stores/storeCart';
-
+import { useSearchStore } from '#imports';
+const storeSearch = useSearchStore()
 const store = useCartStore()
 //imgbb
 </script>
@@ -20,6 +21,19 @@ const store = useCartStore()
 
         <div class="w-full 0 relative bg-gradient-to-b via-90% ">
             <LazyCart />
+            <div class="absolute top-28 flex justify-center  w-full">
+               
+                    <div class="relative m-auto">
+                        <input type="search" v-model="storeSearch.search" placeholder="Procurar..."
+                            class="p-2 bg-slate-100 md:w-full rounded-sm  border-[0.1rem] border-gray-400" />
+                        <MagnifyingGlassIcon class="text-black h-8 absolute top-1 right-2" />
+                        <Icon name="pajamas:search" @click="modal = !modal"
+                            class="text-2xl  text-black  absolute top-2 right-2 cursor-pointer font-bold" />
+
+                    </div>
+
+
+            </div>
 
             <header class="fixed min-w-full  z-50  h-24 flex justify-center   ">
                 <img src="@/assets/images/banner.png" class="xl:w-full xl:h-full h-full w-full 	object-cover  absolute" />
@@ -82,19 +96,6 @@ const store = useCartStore()
             </header>
 
             <div class="mt-44 border-2">
-                <!-- <div 
-                    class="w-48  bg-black right-4  bg-opacity-80  items-center rounded-md border-2  p-4 fixed z-50 bottom-28 flex flex-col">
-                    <Icon name="ci:close-md" @click="modalName = !modalName" class="h-5 text-red-500  cursor-pointer float-right" />
-                    <label class="text-white text-[1.2rem] mb-1">Insira seu nome</label>
-                    <input type="text" class="w-24 bg-gray-200 rounded-sm px-2" placeholder="Nome" v-model="inputName"
-                        required />
-
-                    <a v-if="inputName" class="bg-green-500 m-2 p-1 rounded-md text-white font-bold"
-                        :href="`https://api.whatsapp.com/send?phone=554891699518&text=Ol%C3%A1%20meu%20nome%20%C3%A9%20${inputName},%20tenho%20interesse%20em%20comprar%20os%20produto(s)%20abaixo:%0A%0A%20*${store.sendToWhats}*%20%0A%0ATotal:${store.allPrices}%20`">
-                        Chamar
-                    </a>
-
-                </div> -->
                 <a class="fixed bottom-3 right-5 z-50"
                     href="https://api.whatsapp.com/send?phone=554891752847&text=Ola!%20%0AVim%20pelo%20Site%20Hookah_MK."
                     target="_blank">
@@ -142,4 +143,5 @@ const store = useCartStore()
     opacity: 50%;
     transition-duration: 0.8s;
     color: white;
-}</style>
+}
+</style>

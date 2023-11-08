@@ -13,7 +13,7 @@ export default defineEventHandler(async (event)=>{
   const data6 = await supabase.from('pegador').select()
   const response = data1.data.concat(data2.data).concat(data3.data).concat(data4.data).concat(data5.data).concat(data6.data)
   return{
-    response, data1, data2, data3, data4, data5,data6
+    response
   }
   
 })

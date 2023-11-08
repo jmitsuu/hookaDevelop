@@ -33,44 +33,39 @@ function getCategories(e) {
 async function getCatalago() {
   wait.value = true
   if (categories.value == "essencias") {
-    const { data } = await useFetch(`/api/dbListItems/`);
-    const { data1 } = data.value;
-    dataItems.value = data1.data;
+    const { data:essencias } = await useFetch(`/api/routes/essencias`);
+    dataItems.value = essencias.value.data;
     wait.value = false
   }
   if (categories.value == "aluminios") {
     dataItems.value = ''
-    const { data } = await useFetch(`/api/dbListItems/`);
-    const { data2 } = data.value;
-    dataItems.value = data2.data;
+    const { data:aluminios } = await useFetch(`/api/routes/aluminios`);
+    dataItems.value = aluminios.value.data;
     wait.value = false
   }
   if (categories.value == "carvoes") {
     dataItems.value = ''
-    const { data } = await useFetch(`/api/dbListItems/`);
-    const { data3 } = data.value;
-    dataItems.value = data3.data;
+    const { data:carvoes } = await useFetch(`/api/routes/carvoes`);
+
+    dataItems.value = carvoes.value.data;
     wait.value = false
   }
   if (categories.value == "acendedor") {
     dataItems.value = ''
-    const { data } = await useFetch(`/api/dbListItems/`);
-    const { data4 } = data.value;
-    dataItems.value = data4.data;
+    const { data:acendedor } = await useFetch(`/api/routes/acendedor`);
+    dataItems.value = acendedor.value.data;
     wait.value = false
   }
   if (categories.value == "rosh") {
     dataItems.value = ''
-    const { data } = await useFetch(`/api/dbListItems/`);
-    const { data5 } = data.value;
-    dataItems.value = data5.data;
+    const { data:rosh } = await useFetch(`/api/routes/rosh`);
+    dataItems.value = rosh.value.data;
     wait.value = false
   }
   if (categories.value == "pegador") {
     dataItems.value = ''
-    const { data } = await useFetch(`/api/dbListItems/`);
-    const { data6 } = data.value;
-    dataItems.value = data6.data;
+    const { data:pegador } = await useFetch(`/api/routes/pegador`);
+    dataItems.value = pegador.value.data;
     wait.value = false
   }
   title.value = "";

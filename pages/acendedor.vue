@@ -1,24 +1,27 @@
 <script setup>
-// import { dataEssencia } from '../composables'
+import { useSearchStore } from '@/stores/search';
+const store = useSearchStore()
+const reloadData = ref([])
 const wait = ref()
 const dataAcendedor = ref([])
 async function getApi(){
   wait.value = true
-const {data} = await useFetch('/api/dbListItems/')
+  const {data:acendedor} = await useFetch(`/api/routes/acendedor`)
 wait.value = false
-const {data4} = data.value
-
-dataAcendedor.value = data4.data
-
+dataAcendedor.value = acendedor.value.data
+store.reloadData = acendedor.value.data
+store.queryItems = dataAcendedor.value
 }
+
+
 getApi()
 onMounted(()=>{
- 
+
 })
 </script>
 
 <template>
-    <LazyMenu/>
+
   <main class="p-6 min-h-screen">
     <h1 class="text-[2.5rem] font-bold">Acendedor</h1>
     <div class="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-3">
@@ -36,7 +39,7 @@ onMounted(()=>{
             </div>
       <ul class=""
       v-else
-      v-for="item of dataAcendedor"
+      v-for="item of store.searchItems"
           :key="item.title"
       >
       <LazyProdutos 

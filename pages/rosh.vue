@@ -1,14 +1,15 @@
 <script setup>
-// import { dataEssencia } from '../composables'
+import { useSearchStore } from '@/stores/search';
+const store = useSearchStore()
 const wait = ref()
 const dataRosh = ref([])
 async function getApi(){
   wait.value = true
-const {data} = await useFetch('/api/dbListItems/')
+  const {data:rosh} = await useFetch(`/api/routes/rosh`)
 wait.value = false
-const {data5} = data.value
-
-dataRosh.value = data5.data
+dataRosh.value = rosh.value.data;
+store.reloadData = rosh.value.data
+store.queryItems = dataRosh.value
 
 }
 getApi()
@@ -18,7 +19,6 @@ onMounted(()=>{
 </script>
 
 <template>
-    <LazyMenu/>
   <main class="p-6 min-h-screen">
     <h1 class="text-[2.5rem] font-bold">Rosh</h1>
     <div class="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-3">
@@ -36,7 +36,7 @@ onMounted(()=>{
             </div>
       <ul class=""
       v-else
-      v-for="item of dataRosh"
+      v-for="item of store.searchItems"
           :key="item.title"
       >
       <LazyProdutos 
