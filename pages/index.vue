@@ -28,10 +28,9 @@ const searchCatalag = computed(() => {
     }
     return dataItems.value
 })
-
+getAll()
 onMounted(() => {
-    getAll()
-    reloadData.value = dataItems.value
+
 
 })
 </script>
