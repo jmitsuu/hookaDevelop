@@ -19,21 +19,21 @@ onMounted(() => {
 
 <template>
     <li
-        class="justify-center items-center flex flex-col p-4 rounded-md border-2 m-2 scale-95 hover:scale-100 transition duration-300 shadow-sm hover:shadow-xl">
+        class="justify-center items-center flex flex-col py-2  rounded-md  shadow-md bg-white m-2 scale-95 hover:scale-100 transition duration-300 ">
         <img :src="img" :alt="title" class="h-64" />
 
-        <p class="font-semibold">{{ title }}</p>
-        <p class="text-[1.6rem]">R$ {{ price }}</p>
+        <p class="font-semibold text-blue-950 mt-3">{{ title }}</p>
+        <p class="text-[1.8rem] text-blue-800 font-bold">R$ {{ price }}</p>
         <div class="flex gap-4  items-center mt-3 border-t-2">
 
             <a @click="store.incrementCart(items, qtd)"
-                class="text-[1rem] cursor-pointer flex items-center bg-yellow-500 text-gray-800 px-3 py-2 rounded-md mt-3 hover:bg-yellow-800 transition-all">Adicionar
+                class="text-[1rem] cursor-pointer flex items-center bg-yellow-500 text-gray-800 px-3 py-2 ml-2 rounded-md mt-3 hover:bg-yellow-800 transition-all">Adicionar
 
                 <Icon name="eva:shopping-cart-fill" class=" text-4xl text-yellow-800 cursor-pointer " />
 
             </a>
 
-            <div class="flex border items-center rounded-md px-3 py-2 mt-1">
+            <div class="flex border items-center rounded-md px-3 py-2 m-4">
                 <label class="mr-1">Qtd:</label>
                 <div class="flex flex-col justify-center items-center w-10  ">
                     <Icon name="pajamas:arrow-up"

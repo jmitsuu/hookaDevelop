@@ -162,7 +162,7 @@ onMounted(() => { });
 
 <template>
   <main class="p-6 min-h-screen">
-    <h1 class="text-[2.5rem] font-bold text-center">Painel Administrativo</h1>
+    <h1 class="text-[3.5rem] font-semibold text-blue-950 uppercase ">Painel Administrativo</h1>
     <div class="mt-20">
       <button class="px-4 py-3 bg-green-300 shadow mb-3 hover:bg-green-700 transition-all rounded-md font-semibold"
         @click="modal = !modal" >

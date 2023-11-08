@@ -39,7 +39,7 @@ onMounted(() => {
  
     <main class="p-6 min-h-screen">
     
-        <h1 class="text-[2.5rem] font-bold">Catálogo</h1>
+        <h1 class="text-[3.5rem] font-semibold text-blue-950 uppercase ">Catálogo</h1>
 
         <div class="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-3">
             <div v-if="wait" class="flex justify-center items-center w-screen ">

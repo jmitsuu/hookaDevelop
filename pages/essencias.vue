@@ -21,7 +21,7 @@ onMounted(()=>{
 <template>
     
   <main class="p-6 min-h-screen">
-    <h1 class="text-[2.5rem] font-bold">Essências</h1>
+    <h1 class="text-[3.5rem] font-semibold text-blue-950 uppercase ">Essências</h1>
     <div class="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-3">
       <div v-if="wait" class="flex justify-center items-center w-screen ">
                 <svg v-if="wait" aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin  dark:text-gray-600 fill-blue-600"

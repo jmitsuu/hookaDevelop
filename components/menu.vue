@@ -95,7 +95,7 @@ const store = useCartStore()
                 </div>
             </header>
 
-            <div class="mt-44 border-2">
+            <div class="mt-44 border-b-[0.1rem] border-gray-400 ">
                 <a class="fixed bottom-3 right-5 z-50"
                     href="https://api.whatsapp.com/send?phone=554891752847&text=Ola!%20%0AVim%20pelo%20Site%20Hookah_MK."
                     target="_blank">
