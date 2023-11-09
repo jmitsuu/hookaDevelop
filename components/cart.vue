@@ -18,7 +18,7 @@ onMounted(() => {
   <div v-if="store.modalCart" class="fixed  top-20 w-screen z-50 bg-opacity-90 bg-black h-96 xl:w-full p-2">
 
     <h1 class="text-[2.0rem] mx-auto text-gray-300 text-center font-bold mb-3">Carrinho</h1>
-    <div class="h-64 border overflow-y-scroll">
+    <div class="h-64 border overflow-y-auto">
       <div class="py-2 px-4" v-for="item in store.cart" :key="item.title">
         <div class="flex gap-2 items-center">
           <img :src="`https://kolhpoypmdfbtfpgwuwt.supabase.co/storage/v1/object/public/uploads/`+item.img" class="h-8 rounded-sm" />
