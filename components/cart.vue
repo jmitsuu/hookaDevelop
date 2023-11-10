@@ -84,7 +84,7 @@ onMounted(() => {});
       </div>
 
       <button
-        class="text-[1.9rem] px-2 bg-white text-gray-600 rounded-md"
+        class="text-[1.9rem] px-2 bg-white text-gray-600 rounded-sm"
         @click="store.modalCart = false"
       >
         Voltar
