@@ -2,7 +2,8 @@
     <header class="bg-[#8183b9] bg-opacity-5">
         <LazyMenu/>
     </header>
-    <div class="p-2 bg-[#8183b9] bg-opacity-5">
+    <div class=" bg-[#8183b9] bg-opacity-5 overflow-x-hidden">
+        <LazyCart />
         <slot/>
     </div>
 

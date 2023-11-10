@@ -1,9 +1,12 @@
 <script setup>
-const modal = ref(false)
-const modalName = ref(false)
-const inputName = ref('')
 import { useCartStore } from '@/stores/storeCart';
 import { useSearchStore } from '#imports';
+import { onClickOutside } from "@vueuse/core";
+const modal = ref(false)
+const modalName = ref(false)
+const inputName = ref('');
+const target = ref(null)
+onClickOutside(target, () => (modal.value = false));
 const storeSearch = useSearchStore()
 const store = useCartStore()
 //imgbb
@@ -20,7 +23,7 @@ const store = useCartStore()
 
 
         <div class="w-full 0 relative bg-gradient-to-b via-90% ">
-            <LazyCart />
+      
             <div class="absolute top-28 flex justify-center  w-full">
                
                     <div class="relative m-auto">
@@ -77,7 +80,7 @@ const store = useCartStore()
                 </nav>
 
                 <Transition>
-                    <div v-if="modal"
+                    <div ref="target" v-if="modal"
                         class="flex flex-col h-screen w-44 z-50 right-0 fixed bg-black opacity-80 top-0 gap-8 border-b-2   text-yellow-500 text-[1.8rem] p-3">
 
                         <Icon name="ci:close-md" @click="modal = false" class="h-5 text-red-500 cursor-pointer" />
